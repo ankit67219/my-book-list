@@ -263,17 +263,6 @@ export class CartService {
         stock: 1232,
         category: 'Fantasy',
       },
-       {
-        id: '9',
-        name: 'The Lordy of the Rings',
-        aname: 'J.R.R. Tolkien',
-        price: 230,
-        coverImage: 'https://images.unsplash.com/photo-1526243741027-444d633d7365?w=300&h=400&fit=crop',
-        description: 'An epic high-fantasy novel trilogy.',
-        isbn: '978-0544003415',
-        stock: 0,
-        category: 'Fantasy',
-      },
     ];
   }
 }
