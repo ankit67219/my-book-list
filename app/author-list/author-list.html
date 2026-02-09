@@ -1,0 +1,45 @@
+<!-- Header Row -->
+<div class="authors-table-header">
+  <div class="authors-col-author" a (click)="sortByAuthor()" style="cursor: pointer;">Author & Books</div>
+  
+  
+</div>
+
+<!-- Data Rows -->
+<div class="authors-table">
+  <div *ngFor="let author of authors; let i = index" class="authors-table-row">
+    
+    <!-- List of Authors with their books -->
+    <div class="authors-col-author" (click)="toggleAuthor(author.id)" 
+         style="cursor: pointer; font-weight: bold;">
+      {{ author.name }} ({{ author.books.length }} book{{ author.books.length !== 1 ? 's' : '' }})
+      <span style="margin-left: 10px; font-size: 12px;">
+        {{ expandedAuthorId === author.id ? '▼' : '▶' }}
+      </span>
+    </div>
+    
+    <!-- Expanded Book List -->
+    <div *ngIf="expandedAuthorId === author.id" 
+         style="background: #f9f9f9; padding: 15px; border-left: 3px solid #1e90ff; margin-top: 5px;">
+      <div style="margin-bottom: 10px;">
+        <strong>Books:</strong>
+      </div>
+      <div *ngFor="let book of author.books; let j = index" 
+           style="padding: 8px; border-bottom: 1px solid #eee; display: flex; justify-content: space-between;">
+        <div>
+          <span style="font-size: 14px;">{{ j + 1 }}. {{ book.name }}</span>
+        </div>
+        <div>
+          <span style="font-size: 12px; padding: 4px 8px; border-radius: 4px;" 
+                [ngStyle]="{
+                  'background-color': book.status === 'Completed' ? '#28a745' : (book.status === 'Reading' ? '#ffc107' : '#dc3545'),
+                  'color': '#fff'
+                }">
+            {{ book.status }}
+          </span>
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</div>

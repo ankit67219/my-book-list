@@ -1,0 +1,87 @@
+/* Container styling */
+.signup_form {
+  width: 350px;
+  margin: 80px auto;
+  padding: 30px;
+  background: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+  font-family: Arial, sans-serif;
+}
+
+/* Heading */
+.signup_form h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+/* Labels */
+.signup_form label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Inputs */
+.signup_form input {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.3s ease;
+}
+
+.signup_form input:focus {
+  border-color: #007bff;
+  outline: none;
+}
+
+/* Button */
+.signup_form button {
+  width: 100%;
+  padding: 12px;
+  background: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.signup_form button:hover {
+  background: #0056b3;
+}
+
+/* Sign Up CSS */
+
+.login-message {
+  margin-top: 15px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.login-message a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.login-message a:hover {
+  text-decoration: underline;
+}
+
+input.invalid {
+  border: 1px solid red;
+  background-color: #ffe6e6;
+}
+
+.error-message {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}

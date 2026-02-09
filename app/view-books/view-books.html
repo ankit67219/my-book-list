@@ -1,0 +1,68 @@
+<!-- Simple Search Bar -->
+<div class="search-bar">
+  <input
+    type="text"
+    [(ngModel)]="searchQuery"
+    (keyup)="applyFilters()"
+    placeholder="Search books, authors, or descriptions..."
+    class="search-input"
+  />
+</div>
+<!-- Header for Author and Book List with sorting -->
+<div class="table-header-form">
+
+    <div class="header-row">
+      <div class="header-sn">S.N.</div>
+  <div class="header-zero" (click)="sortByAuthor()">
+    <!-- Author -->
+    <a class="header-link" >Author</a> 
+    <span class="up-arrow" *ngIf="anameAsc">▲</span>
+    <span class="down-arrow" *ngIf="!anameAsc">▼</span>
+  </div>
+  <div class="header-first" (click)="sortByBook()">
+    Book
+      <span class="up-arrow" *ngIf="nameAsc">▲</span>
+      <span class="down-arrow" *ngIf="!nameAsc" >▼</span>
+  </div>
+  <div class="header-second">
+    Description
+  </div>
+</div>
+</div>
+
+<div class="table-form">
+<div class="data-row" *ngFor="let book of bookspagination; let i = index">
+<!-- Data of Tables Displayed -->
+   <div class="data-sn">{{ (currentPage - 1) * itemsPerPage + i + 1 }} </div> <!-- SN List-->
+
+   <div class="data-zero" (click)="gotoauthors()" target="_blank" rel="noopener noreferrer">
+    {{ book.aname }}
+</div>  
+<!-- Author List with lnk to Authot Page-->
+  <div class="data-first">
+    {{ book.name }}
+</div>
+
+<div class="data-second" title="{{book.description}}">
+  {{ book.description}}
+</div>
+
+</div>
+
+<!-- Update Deatils Modal -->
+</div>
+
+<!-- Book List Pagination -->
+<div class="pagination">
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" (click)="previousPage()" [style.opacity]="currentPage === 1 ? 0.5 : 1" [style.cursor]="currentPage === 1 ? 'not-allowed' : 'pointer'">Previous</a></li>
+    <li class="page-item" *ngFor="let page of getPageNumbers()">
+      <button class="page-link" (click)="goToPage(page)" [style.fontWeight]="page === currentPage ? 'bold' : 'normal'" [style.color]="page === currentPage ? '#2575ee' : '#2101a49e'">{{ page }}</button>
+    </li>
+    <li class="page-item"><a class="page-link" (click)="nextPage()" [style.opacity]="currentPage === totalPages ? 0.5 : 1" [style.cursor]="currentPage === totalPages ? 'not-allowed' : 'pointer'">Next</a></li>
+  </ul>
+</nav>
+</div>
+
+

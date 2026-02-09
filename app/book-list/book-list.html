@@ -1,0 +1,131 @@
+
+<div class="book-form">
+ <p>Enter Author: </p>
+  <input [(ngModel)]="newauthor" placeholder="Enter Author Name" (keyup.enter)="addBook()"> 
+  <p>Enter Book: </p>
+  <input [(ngModel)]="newbook" placeholder="Enter Your Books" (keyup.enter)="addBook()">
+  <button (click)="addBook()">Add Book & Author</button>
+
+</div>
+
+<!-- Header for Author and Book List with sorting -->
+<div class="table-header-form">
+    <div class="header-row">
+      <div class="header-sn">S.N.</div>
+
+        <div class="header-first" (click)="sortByBook()">
+    Book
+      <span class="up-arrow" *ngIf="nameAsc">▲</span>
+      <span class="down-arrow" *ngIf="!nameAsc" >▼</span>
+  </div>
+
+  <div class="header-zero" (click)="sortByAuthor()">
+    <!-- Author -->
+    <a class="header-link" >Author</a> 
+    <span class="up-arrow" *ngIf="anameAsc">▲</span>
+    <span class="down-arrow" *ngIf="!anameAsc">▼</span>
+  </div>
+
+  <div class="header-second" (click)="sortByStatus()">
+    Status
+      <span *ngIf="statusAsc">▲</span>
+      <span *ngIf="!statusAsc">▼</span>                                                   
+  </div>
+  <div class="header-third">Update</div>
+</div>
+</div>
+
+<div class="table-form">
+<div class="data-row" *ngFor="let book of bookspagination; let i = index">
+<!-- Data of Tables Displayed -->
+   <div class="data-sn">{{ (currentPage - 1) * itemsPerPage + i + 1 }} </div> <!-- SN List-->
+  <div class="data-first"><b>{{ book.name }}</b></div>
+   <div class="data-zero" (click)="gotoauthors()" target="_blank" rel="noopener noreferrer">{{ book.aname }}</div>  <!-- Author List with lnk to Authot Page-->
+
+  <div class="data-second"> 
+    <!-- Book Status with color display for Status -->
+    <span style="font-size: 12px; padding: 4px 8px; border-radius: 4px;" 
+                [ngStyle]="{
+  'background-color': book.status === 'Completed' 
+    ? '#007bff'
+    : (book.status === 'Reading' 
+      ? '#28a745'
+      : (book.status === 'Dropped' 
+        ? '#dc3545' 
+        : (book.status === 'Planning' 
+          ? '#e3d213' 
+          : '#000'))), 
+  'color': '#fff'
+}">
+            {{ book.status }}
+          </span>
+    </div>
+
+    <!-- Update to open Modal for Update Details -->
+  <div class="data-third">
+    <button class="remove-btn" (click)="removebook((currentPage - 1) * itemsPerPage + i)">Update</button>
+</div>
+</div>
+
+<!-- Update Deatils Modal -->
+<div class="remove-modal" *ngIf="showRemoveModal">
+  <div class="remove-modal-content">
+    <p>Update Book Details</p>
+     <!-- Admin Button -->
+      <button (click)="gotoadmins()">Admins</button>
+  
+    <p *ngIf="bookToDelete" style="color: #666; font-size: 14px; margin: 10px 0;">
+      <strong>Author:</strong> {{ bookToDelete.aname }}<br>
+      <strong>Book:</strong> {{ bookToDelete.name }}
+    </p>
+   
+    <!-- For Book and Author Update Form -->
+    <div style="margin: 15px 0;">
+      <label style="display: block; margin-bottom: 5px; font-weight: bold;">Author Name:</label>
+      <input [(ngModel)]="bookToDelete!.aname" placeholder="Enter author name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+    <div style="margin: 15px 0;">
+      <label style="display: block; margin-bottom: 5px; font-weight: bold;">Book Name:</label>
+      <input [(ngModel)]="bookToDelete!.name" placeholder="Enter book name" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;">
+    </div>
+         
+    <!-- Update Status -->
+    <div style="margin: 15px 0;">
+      <label style="display: block; margin-bottom: 8px; font-weight: bold;">Status:</label>
+      <select [(ngModel)]="bookToDelete!.status" style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 4px;">
+        <option value="Reading">Reading</option>
+        <option value="Completed">Completed</option>
+        <option value="Dropped">Dropped</option>
+        <option value="Planning">Plan to Read</option>
+      </select>
+    </div>
+
+    <!-- Save and Delete Button -->
+    <div style="display: flex; gap: 10px; justify-content: center; margin-top: 20px;">
+       
+      <button (click)="updateBookAndAuthor(indexToRemove!, bookToDelete!)"
+          style="background: #386a96; color: #fff; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer;">
+    Save Changes
+  </button>
+      <button (click)="confirmRemove()" style="background: #dc3545; color: #fff; padding: 8px 16px; border: none; border-radius: 4px; cursor: pointer;">Delete</button>
+  <button (click)="closeRemoveModal()">
+    Cancel
+  </button>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- Book List Pagination -->
+<div class="pagination">
+<nav aria-label="Page navigation">
+  <ul class="pagination">
+    <li class="page-item"><a class="page-link" (click)="previousPage()" [style.opacity]="currentPage === 1 ? 0.5 : 1" [style.cursor]="currentPage === 1 ? 'not-allowed' : 'pointer'">Previous</a></li>
+    <li class="page-item" *ngFor="let page of getPageNumbers()">
+      <button class="page-link" (click)="goToPage(page)" [style.fontWeight]="page === currentPage ? 'bold' : 'normal'" [style.color]="page === currentPage ? '#2575ee' : '#2101a49e'">{{ page }}</button>
+    </li>
+    <li class="page-item"><a class="page-link" (click)="nextPage()" [style.opacity]="currentPage === totalPages ? 0.5 : 1" [style.cursor]="currentPage === totalPages ? 'not-allowed' : 'pointer'">Next</a></li>
+  </ul>
+</nav>
+</div>
+

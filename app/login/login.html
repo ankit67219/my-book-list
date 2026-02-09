@@ -1,0 +1,26 @@
+<!-- Log In Form with Validations -->
+<div class="login_form">
+    <h2>Log In</h2> 
+    <form (ngSubmit)="onLogin()">
+
+      <label>Email</label>
+      <input type="email" [(ngModel)]="email" name="email" [class.invalid]="emailInvalid"
+      required placeholder="Enter Your Email" (keyup.enter)="onLogin()"/><br>
+
+      <div *ngif="emailInvalid" class="error-message">Enter Email Properly</div>
+      <label>Password</label>
+      <input type="password" [(ngModel)]="password" name="password" [class.invalid]="passwordInvalid" minlength="8" required placeholder="Enter Password" (keyup.enter)="onLogin()" /><br>
+
+      <div *ngif="passwordInvalid" class="error-message">Enter Password Properly</div>
+      <button type="submit">Log In</button>
+
+    </form>
+
+    <div class="signup-message">
+      <p>Don't have an account? 
+        <a routerLink="/signup">Sign up here</a>
+      </p>
+  </div>
+
+</div>
+

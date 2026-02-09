@@ -1,0 +1,164 @@
+<div class="checkout-container">
+  <h1>Checkout</h1>
+
+  <div class="checkout-content">
+    <!-- Shipping Form -->
+    <div class="shipping-section">
+      <h2>Shipping Information</h2>
+      
+      <form class="shipping-form">
+        <div class="form-group">
+          <label for="fullName">Full Name *</label>
+          <input
+            type="text"
+            id="fullName"
+            [(ngModel)]="shippingAddress.fullName"
+            name="fullName"
+            placeholder="Rolex Nepal"
+            [class.invalid]="formSubmitted && !shippingAddress.fullName.trim()"
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="email">Email *</label>
+            <input
+              type="email"
+              id="email"
+              [(ngModel)]="shippingAddress.email"
+              name="email"
+              placeholder="ktm@nepal.com"
+              [class.invalid]="formSubmitted && !shippingAddress.email.trim()"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone *</label>
+            <input
+              type="tel"
+              id="phone"
+              [(ngModel)]="shippingAddress.phone"
+              name="phone"
+              placeholder="+977 9843807615"
+              [class.invalid]="formSubmitted && !shippingAddress.phone.trim()"
+            />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="address">Address *</label>
+          <input
+            type="text"
+            id="address"
+            [(ngModel)]="shippingAddress.address"
+            name="address"
+            placeholder="Pulchowk, Lalitpur"
+            [class.invalid]="formSubmitted && !shippingAddress.address.trim()"
+          />
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="city">City *</label>
+            <input
+              type="text"
+              id="city"
+              [(ngModel)]="shippingAddress.city"
+              name="city"
+              placeholder="Pokhara"
+              [class.invalid]="formSubmitted && !shippingAddress.city.trim()"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="state">State *</label>
+            <input
+              type="text"
+              id="state"
+              [(ngModel)]="shippingAddress.state"
+              name="state"
+              placeholder="Bagmati"
+              [class.invalid]="formSubmitted && !shippingAddress.state.trim()"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="zipCode">ZIP Code *</label>
+            <input
+              type="text"
+              id="zipCode"
+              [(ngModel)]="shippingAddress.zipCode"
+              name="zipCode"
+              placeholder="10001"
+              [class.invalid]="formSubmitted && !shippingAddress.zipCode.trim()"
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="country">Country *</label>
+            <input
+              type="text"
+              id="country"
+              [(ngModel)]="shippingAddress.country"
+              name="country"
+              placeholder="Nepal"
+              [class.invalid]="formSubmitted && !shippingAddress.country.trim()"
+            />
+          </div>
+        </div>
+      </form>
+    </div>
+
+    <!-- Order Summary -->
+    <div class="order-summary">
+      <h2>Order Summary</h2>
+      
+      <div class="summary-items">
+        <div class="summary-item" *ngFor="let item of cartItems">
+          <div class="item-info">
+            <img [src]="item.book.coverImage" [alt]="item.book.name" class="item-image" />
+            <div>
+              <p class="item-name">{{ item.book.name }}</p>
+              <p class="item-qty">Qty: {{ item.quantity }}</p>
+            </div>
+          </div>
+          <p class="item-price">Rs. {{ (item.book.price * item.quantity).toFixed(2) }}</p>
+        </div>
+      </div>
+
+      <div class="summary-totals">
+        <div class="total-row">
+          <span>Subtotal:</span>
+          <span>Rs. {{ cartTotal.toFixed(2) }}</span>
+        </div>
+        
+        <div class="total-row">
+          <span>Shipping:</span>
+          <span>{{ shippingCost === 0 ? 'FREE' : 'Rs. ' + shippingCost.toFixed(2) }}</span>
+        </div>
+        
+        <div class="total-row">
+          <span>Tax:</span>
+          <span>Rs. {{ tax.toFixed(2) }}</span>
+        </div>
+        
+        <hr>
+        
+        <div class="total-row grand-total">
+          <strong>Total:</strong>
+          <strong>Rs. {{ grandTotal.toFixed(2) }}</strong>
+        </div>
+      </div>
+
+      <button class="place-order-btn" (click)="placeOrder()">
+        Place Order
+      </button>
+      
+      <button class="back-btn" (click)="backToCart()">
+        Back to Cart
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<div class="user-list">
+    <p>Users List</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <!-- <th>Email</th> -->
+                <th>View Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{ user.name}}</td>
+                <td>{{ user.uname}}</td>
+                <!-- <td>{{ user.email}}</td> -->
+                <td>
+                    <div class="edit-button">
+                    <button (click)="openEditModal(user)">View</button>
+                    </div>
+                    <!-- <button (click)="removeUser(user.uname)">Remove</button> -->
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<div class="modal" *ngIf="showModal">
+  <div class="modal-content">
+    <h3>View User</h3>
+    <form (ngSubmit)="saveEdit()">
+      <label>Name:</label>
+      <input [(ngModel)]="editUserData.name" name="name" required readonly/>
+
+      <label>Username:</label>
+      <input [(ngModel)]="editUserData.uname" name="uname" required readonly />
+
+      <label>Email:</label>
+      <input [(ngModel)]="editUserData.email" name="email" required readonly />
+
+      <!-- <label>Password:</label>
+      <input [(ngModel)]="editUserData.password" name="password" required disabled type="password" /> -->
+
+      <button type="submit">OK</button>
+      <button type="button" (click)="closeModal()">Cancel</button>
+    </form>
+  </div>
+</div>

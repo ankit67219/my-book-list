@@ -1,0 +1,85 @@
+<div class="store-container">
+  <!-- Store Header -->
+  <div class="store-header">
+    <h1>MyBookList Store</h1>
+    <button class="cart-btn" (click)="viewCart()">
+      Cart <span class="cart-badge" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+    </button>
+  </div>
+
+  <!-- Filters and Search -->
+  <div class="filters-section">
+    <div class="search-bar">
+      <input
+        type="text"
+        [(ngModel)]="searchQuery"
+        (keyup)="searchBooks()"
+        placeholder="Search books or authors..."
+        class="search-input"
+      />
+    </div>
+
+    <div class="category-filters">
+      <button
+        *ngFor="let category of categories"
+        [class.active]="selectedCategory === category"
+        (click)="filterByCategory(category)"
+        class="category-btn"
+      >
+        {{ category }}
+      </button>
+    </div>
+
+    <div class="sort-section">
+      <label for="sort">Sort by:</label>
+      <select id="sort" [(ngModel)]="sortBy" (change)="onSortChange()" class="sort-select">
+        <option value="name">Name (A-Z)</option>
+        <option value="author">Author (A-Z)</option>
+        <option value="price-low">Price (Low to High)</option>
+        <option value="price-high">Price (High to Low)</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Books Grid -->
+  <div class="books-grid" *ngIf="filteredBooks.length > 0">
+    <div class="book-card" *ngFor="let book of filteredBooks">
+      <div class="book-image-wrapper">
+        <img [src]="book.coverImage" [alt]="book.name" class="book-image" />
+        <div class="stock-badge" [class.out-of-stock]="!isInStock(book)">
+          {{ isInStock(book) ? 'In Stock' : 'Out of Stock' }}
+        </div>
+      </div>
+
+      <div class="book-info">
+        <h3 class="book-title">{{ book.name }}</h3>
+        <p class="book-author">by {{ book.aname }}</p>
+        <p class="book-description">{{ book.description }}</p>
+        
+        <div class="book-meta">
+          <span class="category-tag">{{ book.category }}</span>
+          <span class="stock-info">{{ book.stock }} left</span>
+        </div>
+
+        <div class="book-footer">
+          <div class="price-section">
+            <span class="price">Rs. {{ book.price.toFixed(2) }}</span>
+          </div>
+          <button
+            class="add-to-cart-btn"
+            (click)="addToCart(book)"
+            [disabled]="!isInStock(book)"
+          >
+            {{ isInStock(book) ? 'Add to Cart' : 'Sold Out' }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- No results -->
+  <div class="no-results" *ngIf="filteredBooks.length === 0">
+    <h2>No books found</h2>
+    <p>Try adjusting your filters or search query</p>
+  </div>
+</div>

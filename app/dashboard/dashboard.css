@@ -1,0 +1,195 @@
+ * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Segoe UI", sans-serif;
+  }
+
+  body {
+    background: #f4f6fb;
+  }
+
+  /* Header */
+  .header {
+    height: 70px;
+    background: linear-gradient(135deg, #5f2eea, #7b61ff);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  }
+
+  .header h2 {
+    font-weight: 600;
+  }
+
+  .logout-btn {
+    background: #ff4d4f;
+    border: none;
+    padding: 8px 16px;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+  }
+
+  /* Layout */
+  .layout {
+    display: flex;
+    min-height: calc(100vh - 70px);
+  }
+
+  /* Sidebar */
+  .sidebar {
+    width: 230px;
+    background: #ffffff;
+    padding: 24px 16px;
+    box-shadow: 4px 0 12px rgba(0,0,0,0.05);
+  }
+
+  .sidebar h3 {
+    margin-bottom: 20px;
+    color: #5f2eea;
+    text-align: center;
+  }
+
+  .nav-btn {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 12px;
+    border: none;
+    border-radius: 8px;
+    background: #f4f6fb;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+  }
+
+  .nav-btn:hover {
+    background: #5f2eea;
+    color: #fff;
+  }
+
+  /* Main Content */
+  .content {
+    flex: 1;
+    padding: 30px;
+  }
+
+  .welcome {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 24px;
+  }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+  }
+
+  .card {
+    background: #ffffff;
+    padding: 24px;
+    border-radius: 14px;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+  }
+
+  .card-title {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 8px;
+  }
+
+  .card-value {
+    font-size: 28px;
+    font-weight: 700;
+    color: #5f2eea;
+  }
+
+  /* Sidebar */
+.sidebar {
+  width: 200px;
+  background: #2d2d2d;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.sidebar button {
+  padding: 10px;
+  background: #444;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.sidebar button:hover {
+  background: #6f42c1;
+}
+
+.sidebar .logout-btn {
+  margin-top: auto;           /* Pushes button to bottom */
+  background-color: rgba(80, 11, 111, 0.452);
+  color: white;
+  border: none;
+  /* border-radius: 50%;         
+  width: 60px;               
+  height: 60px; */
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s ease;
+  align-self: center;         /* Center horizontally */
+}
+
+.sidebar .logout-btn:hover {
+  background-color: rgba(72, 32, 218, 0.363); /* Hover effect */
+}
+
+/* Content */
+.content {
+  flex: 1;
+  padding: 24px;
+  background: #f5f5f5;
+}
+
+.cards {
+  display: flex;
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.card {
+  background: #fff;
+  padding: 40px;
+  width: 200px;
+  border-radius: 12px;
+  box-shadow: 1 4px 12px rgb(135, 99, 234);
+  text-align: center;
+}
+
+.login-header button {
+  background-color: rgb(8, 30, 95);   /* Normal state */
+  color: white;                  /* Text color */
+  border: none;                  /* Remove default border */
+  padding: 10px 20px;            /* Comfortable spacing */
+  font-size: 16px;               /* Readable size */
+  border-radius: 5px;            /* Rounded corners */
+  cursor: pointer;               /* Pointer on hover */
+  transition: background-color 0.3s ease; /* Smooth hover effect */
+}
+
+.login-header button:hover {
+  background-color: rgb(212, 220, 49); 
+  color: rgba(12, 8, 74, 0.699);                  /* Keep text visible */
+}

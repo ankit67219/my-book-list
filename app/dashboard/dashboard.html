@@ -1,0 +1,46 @@
+  <!-- Header -->
+  <header class="header">
+    <h2 (click)="gotolink()">User Dashboard</h2>
+    <div class="login-header">
+      <button (click)="gotologin()">Log In</button>
+    </div>
+
+  </header>
+
+  <!-- Main Layout -->
+  <div class="layout">
+
+    <!-- Sidebar -->
+    <aside class="sidebar">
+      <!-- <button>Dashboard</button> -->
+       <button (click)="goToCatalog()">
+        Admins
+  </button>
+       <button (click)="goToCatalog()">
+        Users
+  </button>
+      <button (click)="gotobooks()">
+        Books
+      </button>
+      <button (click)="gotoauthors()">Authors</button>
+     <button class="logout-btn">
+      Log Out
+
+     </button>
+
+    </aside>
+
+    <!-- Content -->
+    <main class="content">
+      <h3>This is User Dashboard</h3>
+
+      <div class="cards">
+        <div class="card" (click)="goToCatalog()">Admins<br><strong>10</strong></div>
+        <div class="card" (click)="goToCatalog()">Users<br><strong>120</strong></div>
+        <div class="card" (click)="gotobooks()">Books<br><strong>45</strong></div>
+        <div class="card" (click)="gotoauthors()">Authors<br><strong>15</strong></div>
+        <div class="card" (click)="goToCatalog()">Active<br><strong>30</strong></div>
+      </div>
+    </main>
+
+  </div>

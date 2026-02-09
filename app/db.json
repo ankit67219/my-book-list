@@ -1,0 +1,25 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "name": "Ankit",
+      "uname": "ankit",
+      "email": "ankit@mail.com",
+      "password": "12345678"
+    },
+    {
+      "id": 2,
+      "name": "Demo User",
+      "uname": "demo",
+      "email": "demo@mail.com",
+      "password": "demo1234"
+    },
+    {
+      "id": "fd35",
+      "name": "json test 001",
+      "uname": "jtest001",
+      "email": "jtest001@test.com",
+      "password": "passwordtest"
+    }
+  ]
+}

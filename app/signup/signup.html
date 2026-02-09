@@ -1,0 +1,37 @@
+<!-- Sign Up Form with Validations -->
+
+<div class="signup_form">
+    <h2>Sign Up</h2>
+    <form (ngSubmit)="onSignup()">
+
+        <label>Enter Name: </label>
+        <input type="text" [(ngModel)]="name" name="name" [class.invalid]="nameInvalid"
+        required placeholder="Enter Your Full Name"/>
+
+        <label>Enter Username: </label>
+        <input type="text" [(ngModel)]="uname" name="uname" [class.invalid]="unameInvalid"
+        required placeholder="Enter Username"/>
+
+        <label>Enter Email: </label>
+        <input type="email" [(ngModel)]="email" name="email" [class.invalid]="emailInvalid"
+        required placeholder="Enter Email Address"/><br>
+
+        <label>Password</label>
+        <input type="password" [(ngModel)]="password" name="password" [class.invalid]="passwordInvalid"
+        required placeholder="Enter Password"/>
+
+         <label >Confirm Password</label>
+        <input type="password" [(ngModel)]="confirmPassword" name="confirmPassword" [class.invalid]="passwordInvalid"
+        required placeholder="Confirm Password"/><br>
+
+        <button type="submit">Sign Up</button>
+
+    </form>
+
+      <div class="login-message">
+    <p>Already have an account? 
+      <a routerLink="">Log In here</a>
+    </p>
+  </div>
+
+</div>

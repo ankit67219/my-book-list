@@ -1,0 +1,62 @@
+<div class="order-history-container">
+  <div class="header">
+    <h1>Order History</h1>
+    <button class="continue-shopping-btn" (click)="continueShopping()">
+      Continue Shopping
+    </button>
+  </div>
+
+  <!-- Empty state -->
+  <div *ngIf="orders.length === 0" class="empty-orders">
+    <div class="empty-icon">📦</div>
+    <h2>No orders yet</h2>
+    <p>Start shopping to see your order history here</p>
+    <button class="shop-btn" (click)="continueShopping()">
+      Browse Books
+    </button>
+  </div>
+
+  <!-- Orders list -->
+  <div *ngIf="orders.length > 0" class="orders-list">
+    <div class="order-card" *ngFor="let order of orders">
+      <div class="order-header">
+        <div class="order-info">
+          <h3>Order #{{ order.id }}</h3>
+          <p class="order-date">{{ formatDate(order.date) }}</p>
+        </div>
+        <div class="order-status" [style.background-color]="getStatusColor(order.status)">
+          {{ order.status | titlecase }}
+        </div>
+      </div>
+
+      <div class="order-items">
+        <div class="order-item" *ngFor="let item of order.items">
+          <img [src]="item.book.coverImage" [alt]="item.book.name" class="item-image" />
+          <div class="item-details">
+            <p class="item-name">{{ item.book.name }}</p>
+            <p class="item-author">by {{ item.book.aname }}</p>
+            <p class="item-qty">Quantity: {{ item.quantity }}</p>
+          </div>
+          <p class="item-price">Rs. {{ (item.book.price * item.quantity).toFixed(2) }}</p>
+        </div>
+      </div>
+
+      <div class="order-footer">
+        <div class="shipping-address">
+          <strong>Shipping to:</strong>
+          <p>{{ order.shippingAddress.fullName }}</p>
+          <p>{{ order.shippingAddress.address }}</p>
+          <p>{{ order.shippingAddress.city }}, {{ order.shippingAddress.state }} {{ order.shippingAddress.zipCode }}</p>
+        </div>
+        <div class="order-total">
+          <strong>Total:</strong>
+          <span class="total-amount">Rs. {{ order.total.toFixed(2) }}</span>
+        </div>
+      </div>
+
+      <button class="view-details-btn" (click)="viewOrderDetails(order.id)">
+        View Details
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,138 @@
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+  
+  <div class="container">
+    <!-- Search -->
+    <div class="search-container">
+      <h1>Track your reading journey</h1>
+
+      <div class="search-box">
+  <input type="text" [(ngModel)]="searchQuery" 
+         (input)="filterBooks()" 
+         placeholder="Search books or authors..." />
+       <!-- <ul class="search-dropdown" *ngIf="searchQuery && filteredBooks.length > 0">
+    <li *ngFor="let book of filteredBooks" 
+        (click)="selectBook(book)"> -->
+        <ul class="search-dropdown" *ngIf="searchQuery && searchResults.length > 0">
+  <li *ngFor="let book of searchResults"
+      (click)="selectBook(book)">
+      {{ book.name }} — {{ book.aname }} ({{ book.status }})
+    </li>
+  </ul>
+
+  
+    
+    </div>
+  </div>
+
+    <!-- Quick Stats -->
+    <div class="stats">
+      <div class="stat-card books">
+        <div class="stat-number">{{books.length}}</div>
+        <div class="stat-label">Total Books</div>
+      </div>
+      <div class="stat-card completed">
+        <div class="stat-number">{{ getBookCountByStatus('Completed') }}</div>
+        <div class="stat-label">Completed</div>
+      </div>
+      <div class="stat-card reading">
+        <div class="stat-number">{{ getBookCountByStatus('Reading') }}</div>
+        <div class="stat-label">Reading</div>
+      </div>
+      <div class="stat-card dropped">
+        <div class="stat-number">{{ getBookCountByStatus('Dropped') }}</div>
+        <div class="stat-label">Dropped</div>
+      </div>
+      <div class="stat-card planning">
+        <div class="stat-number">{{ getBookCountByStatus('Planning') }}</div>
+        <div class="stat-label">Plan to Read</div>
+      </div>
+    </div>
+<!-- Reading -->
+<section class="collapse-section">
+
+  <div class="section-header" (click)="isReadingOpen = !isReadingOpen">
+    <h2>Reading</h2>
+  </div>
+
+  <div class="collapse-content" [class.open]="isReadingOpen">
+    <div class="book-grid">
+      <a *ngFor="let book of getBooksByStatus('Reading', filteredBooks)"
+         class="book-card"
+         [ngClass]="book.status">
+
+        <img
+          src="https://img.freepik.com/premium-vector/open-book-icon-education-literature-read-theme-colorful-design-hand-drawn-book-illustration_991720-974.jpg"
+          alt="Book cover"
+          class="book-cover">
+        <div class="book-info">
+          <div class="book-title">{{ book.name }}</div>
+          <div class="book-author">{{ book.aname }}</div>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+    <!-- Completed Section -->
+<section class="collapse-section">
+  <div class="section-header" (click)="isCompletedOpen = !isCompletedOpen">
+  <h2>Completed</h2>
+  </div>
+  <div class="collapse-content" [class.open]="isCompletedOpen">
+  <div class="book-grid">
+    <a *ngFor="let book of getBooksByStatus('Completed', filteredBooks)" 
+       class="book-card" 
+       [ngClass]="book.status">
+      <img 
+      src="https://cdn-icons-png.flaticon.com/512/7050/7050939.png"
+      alt="Book cover" 
+      class="book-cover">
+      <div class="book-info">
+        <div class="book-title">{{ book.name }}</div>
+        <div class="book-author">{{ book.aname }}</div>
+      </div>
+    </a>
+  </div>
+  </div>
+</section>
+
+<!-- Plans Section -->
+<section class="collapse-section">
+  <div class="section-header" (click)="isPlanningOpen = !isPlanningOpen">
+  <h2>Plan to Read</h2>
+  </div>
+  <div class="collapse-content" [class.open]="isPlanningOpen">
+  <div class="book-grid">
+    <a *ngFor="let book of getBooksByStatus('Planning', filteredBooks)" 
+       class="book-card" [ngClass]="book.status">
+      <img src="https://cdn.create.vista.com/api/media/medium/471057444/stock-vector-bookmark-tag-yellow-glowing-neon-icon?token=" alt="Book cover" class="book-cover">
+      <div class="book-info">
+        <div class="book-title">{{ book.name }}</div>
+        <div class="book-author">{{ book.aname }}</div>
+      </div>
+    </a>
+  </div>
+</div>
+</section>
+
+<!-- Dropped Section -->
+<section class="collapse-section">
+  <div class="section-header" (click)="isDroppedOpen = !isDroppedOpen">
+  <h2>Dropped</h2>
+</div>
+<div class="collapse-content" [class.open]="isDroppedOpen">
+  <div class="book-grid">
+    <a *ngFor="let book of getBooksByStatus('Dropped', filteredBooks)" 
+       class="book-card" [ngClass]="book.status">
+      <img src="https://previews.123rf.com/images/syuzannam/syuzannam1909/syuzannam190900295/129443715-stop-book-sign-icon-restrict-reading-symbol-vector-illustration.jpg" alt="Book cover" class="book-cover">
+      <div class="book-info">
+        <div class="book-title">{{ book.name }}</div>
+        <div class="book-author">{{ book.aname }}</div>
+      </div>
+    </a>
+  </div>
+  </div>
+</section>
+
+</div>

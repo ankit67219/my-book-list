@@ -1,0 +1,125 @@
+<!-- CSS inside Sty;e Tag -->
+
+<!-- Bootstrap CSS -->
+<link
+  href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+
+<!-- Header Test -->
+
+
+<!--  Header Test-->
+<!-- Header Testing -->
+
+<header class="main-header">
+  <div class="header-container">
+    <div class="header-inner">
+
+      <!-- Logo -->
+      <a routerLink="/home" class="logo">
+        <img src="https://pbs.twimg.com/media/G_5F0J4bQAA2vw8?format=png&name=small" alt="MyBookList">
+      </a>
+
+      
+      <!-- Navigation -->
+      <nav class="main-nav">
+        <a class="active" (click)="gotohome()">Home</a>
+        <a (click)="goToBooks()">My Books</a>
+        <a (click)="gotoauthors()">Authors</a>
+        <a (click)="goToStore()">Store</a>
+        <a *ngIf="isAdmin" (click)="goToAdminDashboard()" class="admin-link">Admin</a>
+        <!-- <a href="#">Search</a>
+        <a href="#">Stats</a> -->
+
+        <!-- Cart Icon with Badge -->
+        <div class="cart-icon" *ngIf="isLoggedIn" (click)="goToCart()">
+          🛒
+          <span class="cart-count" *ngIf="cartItemCount > 0">{{ cartItemCount }}</span>
+        </div>
+
+        <!-- Profile Dropdown -->
+        <div class="profile-dropdown" *ngIf="isLoggedIn">
+          <button class="profile-btn">
+            {{username || 'Profile ▾'}}
+          </button>
+
+          <div class="profile-menu">
+            <a>{{username}}</a>
+            <!-- <a href="#">{{username}}</a> -->
+            <span class="role-indicator" [class.admin]="isAdmin">{{ userRole }}</span>
+            <!-- <a routerLink="/home">Settings</a> -->
+            <a *ngIf="isAdmin" (click)="goToOrders()">Order History</a>
+            <a *ngIf="isAdmin" (click)="goToAdminDashboard()">Settings</a>
+            <a><hr>Want to Log Out?<br><br>
+            <button class="logout-btn" (click)="asklogout()">Log Out</button></a>
+          </div>
+        </div>
+
+        <!-- Logout -->
+        <!-- <button class="logout-btn" (click)="asklogout()">Log Out</button> -->
+      <div class="login-header">
+        <a *ngIf="!isLoggedIn" routerLink="/login" class="login-link">Log In</a>
+         </div>
+      </nav>
+    </div>
+  </div>
+
+</header>
+
+<!-- Deault Header -->
+
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Navbar scroll</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarScroll">
+      <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style="--bs-scroll-height: 100px;">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Link</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Link
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="#">Action</a></li>
+            <li><a class="dropdown-item" href="#">Another action</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#">Something else here</a></li>
+          </ul>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Link</a>
+        </li>
+      </ul>
+      <form class="d-flex" role="search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav> -->
+
+<!-- Logout Confirmation -->
+
+<div class="modal" *ngIf="LogoutConfirmation">
+  <div class="modal-content">
+    <p>Are you sure you want to Log Out?</p>
+    <button (click)="onlogout()">Yes</button>
+    <button (click)="cancellogout()">No</button>
+  </div>
+</div>
+
+
+<!-- Router Outlet to load Components -->
+<router-outlet></router-outlet>
+<!-- Simple Footer -->
+<footer>
+  <p>© 2026 MyBookList — Track what you read.</p>
+</footer>

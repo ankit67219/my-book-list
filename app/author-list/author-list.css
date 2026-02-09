@@ -1,0 +1,67 @@
+/* Authors Container */
+.authors-container {
+  margin: 20px auto;
+  max-width: 800px;
+}
+
+/* Title */
+.authors-header {
+  margin-bottom: 20px;
+  padding: 0 20px;
+
+}
+
+.authors-header h2 {
+  margin: 0;
+  color: #333;
+  font-family: "comic sans ms";
+}
+
+/* Table Header */
+.authors-table-header {
+  display: flex;
+  background: #20c7d0;
+  color: #fff;
+  border-radius: 8px 8px 0 0;
+  /* padding: 12px 0; */
+  font-weight: bold;
+  font-size: 20px;
+  font: comic sans ms;
+}
+
+.authors-col-sn,
+.authors-col-author,
+.authors-col-books {
+  flex: 1;
+  text-align: center;
+  padding: 10px 20px;
+}
+
+/* Table Body */
+.authors-table {
+  background: #f9f9f9;
+  border: 1px solid #ddd;
+  border-top: none;
+  border-radius: 0 0 8px 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+}
+
+/* Table Row */
+.authors-table-row {
+  display: flex;
+  padding: 12px 0;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.authors-table-row:last-child {
+  border-bottom: none;
+}
+
+.authors-table-row .authors-col-sn,
+.authors-table-row .authors-col-author,
+.authors-table-row .authors-col-books {
+  font-size: 14px;
+  color: #333;
+  text-align: center;
+}

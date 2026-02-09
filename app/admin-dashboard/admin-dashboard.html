@@ -1,0 +1,158 @@
+<!-- Admin Dashboard -->
+<div class="admin-dashboard">
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-header">
+      <h2>Admin Panel</h2>
+    </div>
+    <nav class="sidebar-nav">
+      <button class="nav-btn active">
+        <span>📊</span> Dashboard
+      </button>
+      <button class="nav-btn" (click)="goToCatalog()">
+        <span>👥</span> Users
+      </button>
+      <button class="nav-btn" (click)="gotobooks()">
+        <span>📖</span> Books
+      </button>
+      <button class="nav-btn" (click)="gotoauthors()">
+        <span>✍️</span> Authors
+      </button>
+      <button class="nav-btn" (click)="gotohome()">
+        <span>🏠</span> Home
+      </button>
+    </nav>
+    <div class="sidebar-footer">
+      <button class="logout-btn" (click)="gotologin()">
+        🚪 Logout
+      </button>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="main-content">
+    <!-- Header -->
+    <header class="content-header">
+      <h1>Admin Dashboard</h1>
+      <div class="user-info">
+        <span class="admin-badge">Admin</span>
+        <span>{{ currentUser?.name }}</span>
+      </div>
+    </header>
+
+    <!-- Stats Cards -->
+    <section class="stats-section">
+      <div class="stat-card users">
+        <div class="stat-icon">👥</div>
+        <div class="stat-info">
+          <h3>{{ stats.totalUsers }}</h3>
+          <p>Total Users</p>
+        </div>
+      </div>
+      <div class="stat-card admins">
+        <div class="stat-icon">🛡️</div>
+        <div class="stat-info">
+          <h3>{{ stats.admins }}</h3>
+          <p>Admins</p>
+        </div>
+      </div>
+      <div class="stat-card normal-users">
+        <div class="stat-icon">👤</div>
+        <div class="stat-info">
+          <h3>{{ stats.normalUsers }}</h3>
+          <p>Normal Users</p>
+        </div>
+      </div>
+      <div class="stat-card books">
+        <div class="stat-icon">📚</div>
+        <div class="stat-info">
+          <h3>{{ stats.totalBooks }}</h3>
+          <p>Total Books</p>
+        </div>
+      </div>
+      <div class="stat-card authors">
+        <div class="stat-icon">✍️</div>
+        <div class="stat-info">
+          <h3>{{ stats.totalAuthors }}</h3>
+          <p>Authors</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Users Table -->
+    <section class="users-section">
+      <div class="section-header">
+        <h2>User Management</h2>
+      </div>
+
+      <div class="users-table-container">
+        <table class="users-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Status</th>
+              <th>Update</th>
+              <!-- <th>Actions</th> -->
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of allUsers">
+              <td>{{ user.name }}</td>
+              <td>{{ user.uname }}</td>
+              <td>{{ user.email }}</td>
+              <td>
+                <span class="role-badge" [class.admin]="user.role === 'admin'" [class.user]="user.role === 'user'">
+                  {{ user.role }}
+                </span>
+              </td>
+              <td>
+                <!-- Role change dropdown -->
+                <select 
+                  [(ngModel)]="user.role" 
+                  (change)="updateUserRole(user)"
+                  [disabled]="user.uname === currentUser?.uname"
+                  [hidden]="user.uname === currentUser?.uname"
+                  class="role-select"
+                >
+                  <option value="user">User</option>
+                  <option value="admin">Admin</option>
+                </select>
+                <span *ngIf="user.uname === currentUser?.uname" class="you-text">You</span>
+              </td>
+              <!-- <td class="actions">
+                <button 
+                  class="delete-btn" 
+                  (click)="confirmDeleteUser(user)" 
+                  *ngIf="canDelete(user)"
+                >
+                  Delete
+                </button>
+                <span *ngIf="!canDelete(user)" class="you-badge">You</span>
+              </td> -->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Delete Confirmation Modal -->
+<div class="modal-overlay" *ngIf="showDeleteConfirmModal && userToDelete">
+  <div class="modal confirm-modal">
+    <div class="modal-header">
+      <h2>Confirm Delete</h2>
+      <button class="close-btn" (click)="closeDeleteConfirmModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p>Are you sure you want to delete user <strong>{{ userToDelete.uname }}</strong>?</p>
+      <p class="warning">⚠️ This will also delete all their books and data!</p>
+    </div>
+    <div class="modal-footer">
+      <button class="cancel-btn" (click)="closeDeleteConfirmModal()">Cancel</button>
+      <button class="delete-confirm-btn" (click)="deleteUser()">Delete User</button>
+    </div>
+  </div>
+</div>
